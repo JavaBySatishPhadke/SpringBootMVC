@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+
+
+   <h1  style="color:red;text-align:center"> Edit Employee Form  Page2  </h1>
+<form  th:action="@{/employee/edit}" method="POST" th:object="${emp}">
+      <table  align="center"  bgcolor="cyan">
+          <tr>
+              <td>  No </td>
+              <td> <input th:field="*{empno}" readonly/> </td>
+           </tr>
+           <tr>
+              <td>  Name </td>
+              <td> <input th:field="*{ename}"/> </td>
+           </tr>
+           <tr>
+              <td>  Job </td>
+               <td> <input th:field="*{job}"/> </td> 
+           </tr>
+           <tr>
+              <td>  salary </td>
+               <td> <input th:field="*{sal}"/> </td> 
+           </tr>
+           <tr>
+              <td>  Dept no: </td>
+              <td> <select th:field="*{deptno}" >
+                              <option value="10"  >10</option> 
+                              <option value="20"  >20</option> 
+                              <option value="30"  >30</option> 
+                         </select>
+              </td>
+           </tr>
+           <tr>
+               <td> <input type="submit"  value="Edit Employee">  </td>
+               <td>  <input type="reset"  value="cancel">  </td>
+           </tr>
+           
+      </table>
+   </form>

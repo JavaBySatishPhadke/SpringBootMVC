@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+
+<h1 style="color:red;text-align:center">    Employee Report  </h1>
+ 
+    <div  th:if="${!pageData.empty}">
+        <table align="center" border="1" bgcolor="yellow">
+           <tr bgcolor="cyan">
+            <th>empno</th>
+            <th>ename</th>
+            <th>job</th>
+            <th>salary</th>
+            <th>deptno</th>
+            <th>operations</th>
+           </tr>
+        
+          <tr  th:each="emp:${pageData}"  bgcolor="Cyan">
+             <td><span th:text="${emp.empno}"/>  </td>
+              <td><span th:text="${emp.ename}"/>  </td>
+               <td><span th:text="${emp.job}"/>  </td>
+                <td><span th:text="${emp.sal}"/> </td>
+                 <td><span th:text="${emp.deptno}"/> </td>
+                 <td><a th:href="@{/employee/edit(no=${emp.empno})}"><img th:src="@{/images/edit.jpg}" width="30px" height="40px"></a>  
+                         &nbsp;&nbsp; <a onclick="return confirm('Are you sure to delete??')" th:href="@{/employee/delete(no=${emp.empno})}"><img th:src="@{/images/delete.jpg}" width="30px" height="40px"></a> </td>
+          </tr>
+        
+         </table>
+         <center>
+              <span th:if="${!pageData.isFirst() }"> 
+               <a th:href="@{/employee/report(page=0)}">first</a> &nbsp;&nbsp; 
+              </span>
+             
+             <span th:if="${!pageData.isLast() }"> 
+               <a th:href="@{/employee/report(page=${pageData.getPageable().getPageNumber()+1})}">next</a>
+             </span>  
+               
+               [
+              <span th:each="i : ${#numbers.sequence(0, pageData.getTotalPages() - 1)}">
+                        <a th:href="@{/employee/report(page=${i})}" th:text="${i + 1}"></a>&nbsp;&nbsp;
+            </span>
+               ]
+               
+              <span th:if="${!pageData.isFirst() }"> 
+                            <a th:href="@{/employee/report(page=${pageData.getPageable().getPageNumber()-1})}">previous</a> &nbsp;&nbsp; 
+             </span>
+             <span th:if="${!pageData.isLast() }"> 
+                 <a th:href="@{/employee/report(page=${pageData.getTotalPages()-1})}">last</a>
+             </span>
+             </center>
+      
+         
+ </div>      
+       <div  th:if="${pageData.empty}">
+                  <h1  style="color:red;text-align:center"> No Data Found </h1>
+       </div>
+ 
+ 
+   <br><br>
+                                         <h1 style="color:green;text-align:center"  th:text="${resultMsg}"/>
+  <br><br>
+                             <center> <a th:href="@{/employee/register}">Add Employee <img th:src="@{/images/add.jpg}"/></a>   </center>
+  <br><br>
+                           <center>  <a th:href="@{/employee/home}">home <img th:src="@{/images/home.jpg}"/></a>  </center>
+                           
+  
